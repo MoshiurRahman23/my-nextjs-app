@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 // import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Shared/Navbar";
+import Providers from "@/lib/Provider";
 // import Footer from "@/components/Shared/Footer";
 
 const geistSans = Geist({
@@ -26,16 +27,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light">
-      <body
-        //data-theme="light"
-        // className={roboto.className}
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar />
-        {children}
-        {/* <Footer /> */}
-      </body>
-    </html>
+    <Providers>
+      <html lang="en" data-theme="light">
+        <body
+          //data-theme="light"
+          // className={roboto.className}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Navbar />
+          {children}
+          {/* <Footer /> */}
+        </body>
+      </html>
+    </Providers>
   );
 }

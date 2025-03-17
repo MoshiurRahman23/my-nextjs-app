@@ -1,21 +1,18 @@
-import React from "react";
-import { Card } from "antd";
+"use client";
+import { Button, Card } from "antd";
 import Image from "next/image";
-import { Button } from "antd";
 import Link from "next/link";
 
-const CardPage = ({ food }) => {
-  //   console.log(food);
+const CardDetails = ({ food }) => {
   const { title, description, price, image } = food;
   return (
     <Card style={{ width: 300 }} hoverable>
-      {/* Ensure Image URL exists */}
       {/* {images?.length > 0 && (
         <Image
           src={images[0].secure_url}
           height={200}
           width={300}
-          alt={name}
+          alt="name of image"
           className="rounded-md object-cover"
         />
       )} */}
@@ -23,20 +20,22 @@ const CardPage = ({ food }) => {
         src={image}
         height={200}
         width={300}
-        alt="PicnName"
+        alt="name of image"
         className="rounded-md object-cover"
       />
+
       <p className="text-orange-400 font-bold mt-2">{title}</p>
       <p className="text-gray-600">{description}</p>
 
-      <div className="w-full items-center mt-4">
-        {/* <p className="text-blue-700 font-bold">Price: ${price}</p> */}
-        <Link href={"/blogs/id"}>
-          <Button type="primary">View Details</Button>
+      <div className="flex justify-between items-center mt-4">
+        <p className="text-blue-700 font-bold">Price: ${price}</p>
+        <Link href={"/booking"}>
+          {/* //`/blogs/${params}` */}
+          <Button type="primary">Buy Now</Button>
         </Link>
       </div>
     </Card>
   );
 };
 
-export default CardPage;
+export default CardDetails;

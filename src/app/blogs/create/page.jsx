@@ -2,7 +2,7 @@ import PostBlogFormPage from "@/components/ui/PostBlogForm";
 
 const BlogsCreatePage = () => {
   return (
-    <div>
+    <div className="bg-base-300">
       <PostBlogFormPage />
     </div>
   );

@@ -1,22 +1,100 @@
+"use client";
 import { useForm } from "react-hook-form";
 
 const PostBlogFormPage = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = async (data) => {
+    const res = await fetch("http://localhost:5000/foods");
+    const posts = await res.json();
+    data._id = JSON.stringify(posts.length + 1);
+    data.total_liks = "100";
+    console.log(data);
+  };
   return (
-    <div>
-      /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="test" {...register("example")} />
+    <div className="py-10">
+      <h1 className="text-center text-4xl">
+        Post Your <span className="text-accent font-semibold">POST</span>
+      </h1>
+      <div className="hero min-h-screen">
+        <div className="card w-[50%] shadow-xl bg-base-100">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <h2 className="text-center text-2xl text-accent font-semibold">
+              Add Your Queries
+            </h2>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Title</span>
+              </label>
+              <input
+                type="text"
+                {...register("title")}
+                placeholder="Title"
+                className="input w-full input-bordered"
+                required
+              />
+            </div>
 
-        {/* include validation with required or other standard HTML validation rules */}
-        <input {...register("exampleRequired", { required: true })} />
-        {/* errors will return when field validation fails  */}
-        {errors.exampleRequired && <span>This field is required</span>}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Description</span>
+              </label>
+              <textarea
+                {...register("description")}
+                placeholder="Description"
+                className="textarea w-full textarea-bordered"
+                required
+              />
+            </div>
 
-        <input type="submit" />
-      </form>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Publish Date</span>
+              </label>
+              <input
+                {...register("publish_date")}
+                type="date"
+                className="input w-full input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold">Author Name</span>
+              </label>
+              <input
+                type="text"
+                {...register("author_name")}
+                placeholder="Author Name"
+                className="input w-full input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-semibold w-full">
+                  Blog Image
+                </span>
+              </label>
+              <input
+                type="url"
+                {...register("blog_image")}
+                placeholder="Image URL"
+                className="input w-full input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control mt-6">
+              <button
+                type="submit"
+                className="btn w-full btn-accent btn-outline"
+              >
+                Post
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
