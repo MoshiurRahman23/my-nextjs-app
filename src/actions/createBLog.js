@@ -1,4 +1,5 @@
-export default async function createBLog() {
+"use server";
+export default async function createBLog(data) {
   const res = await fetch("http://localhost:5000/foods", {
     method: "POST",
     headers: {
@@ -7,5 +8,6 @@ export default async function createBLog() {
     body: JSON.stringify(data),
     cache: "no-cache",
   });
-  return;
+  const postInfo = await res.json();
+  return postInfo;
 }

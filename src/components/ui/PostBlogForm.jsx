@@ -1,4 +1,5 @@
 "use client";
+import createBLog from "@/actions/createBLog";
 import { useForm } from "react-hook-form";
 
 const PostBlogFormPage = () => {
@@ -7,9 +8,16 @@ const PostBlogFormPage = () => {
   const onSubmit = async (data) => {
     const res = await fetch("http://localhost:5000/foods");
     const posts = await res.json();
-    data._id = JSON.stringify(posts.length + 1);
+    data.id = JSON.stringify(posts.length + 1);
     data.total_liks = "100";
     console.log(data);
+
+    try {
+      const res = await createBLog(data);
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <div className="py-10">
@@ -78,7 +86,7 @@ const PostBlogFormPage = () => {
               </label>
               <input
                 type="url"
-                {...register("blog_image")}
+                {...register("image")}
                 placeholder="Image URL"
                 className="input w-full input-bordered"
                 required

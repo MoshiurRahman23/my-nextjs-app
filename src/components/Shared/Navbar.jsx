@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/assets/CoverPhoto/Mr._Coffee.svg";
+import { signOut } from "next-auth/react";
 
 const navbarMenu = () => {
   return (
@@ -27,7 +29,7 @@ const navbarMenu = () => {
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ session }) => {
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -56,17 +58,54 @@ const Navbar = () => {
             {navbarMenu()}
           </ul>
         </div>
-        <Link href={"/"} className="btn btn-accent py-2 text-2xl">
+        <Link href={"/"} className="btn btn-accent rounded-full py-4 text-2xl">
           <Image src={logo} width={100} height={50} alt="logo"></Image>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navbarMenu()}</ul>
       </div>
-      <div className="navbar-end">
-        <Link href="/blogs/create" className="btn btn-accent text-white px-5">
+      <div className="navbar-end gap-2">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <div className="w-10 rounded-full">
+            <Image
+              src={
+                session?.user?.image ||
+                "https://www.freepik.com/free-photos-vectors/avatar"
+              }
+              width={500}
+              height={500}
+              alt="picture"
+              className="max-w-sm rounded-lg shadow-2xl"
+            />
+          </div>
+        </div>
+        <Link
+          href="/blogs/create"
+          className="btn btn-accent rounded-full text-white px-5"
+        >
           Post Blog
         </Link>
+        {session?.user ? (
+          <Link
+            href="/login"
+            onClick={() => signOut()}
+            className="btn btn-accent  text-white rounded-full px-5"
+          >
+            Log Out
+          </Link>
+        ) : (
+          <Link
+            href="/login"
+            className="btn btn-accent  text-white rounded-full px-5"
+          >
+            Log In
+          </Link>
+        )}
       </div>
     </div>
   );
