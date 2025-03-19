@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/assets/CoverPhoto/Mr._Coffee.svg";
 import { signOut } from "next-auth/react";
+import second from "../../../public/Avator.jpg";
 
 const navbarMenu = () => {
   return (
@@ -73,10 +74,7 @@ const Navbar = ({ session }) => {
         >
           <div className="w-10 rounded-full">
             <Image
-              src={
-                session?.user?.image ||
-                "https://www.freepik.com/free-photos-vectors/avatar"
-              }
+              src={session?.user?.image || second}
               width={500}
               height={500}
               alt="picture"

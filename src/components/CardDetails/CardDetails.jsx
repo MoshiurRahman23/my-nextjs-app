@@ -29,7 +29,7 @@ const CardDetails = ({ food }) => {
 
       <div className="flex justify-between items-center mt-4">
         <p className="text-blue-700 font-bold">Price: ${price}</p>
-        <Link href={"/booking"}>
+        <Link href={"/bookings"}>
           {/* //`/blogs/${params}` */}
           <Button type="primary">Buy Now</Button>
         </Link>

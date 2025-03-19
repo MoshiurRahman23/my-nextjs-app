@@ -41,7 +41,7 @@ const LogInPage = () => {
           />
         </div>
 
-        <div className="card w-[70%] h-[80%] shadow-xl bg-base-100">
+        <div className="card w-[70%] h-[60%] shadow-xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control mt-5">
               <label className="label">
